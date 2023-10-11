@@ -14,6 +14,7 @@ from datasets import load_dataset
 # 2. python -m spacy download en
 nlp = spacy.load('en_core_web_sm')
 
+
 # For running stem_flag="Lem" download the below:
 # nltk.download('wordnet')
 
@@ -49,13 +50,12 @@ def clean_string(input_text,
 
     # Remove puncuation
     if normalize_punctuation_flag:
-        #map punctuation to dot
-        input_text = input_text.translate(str.maketrans(":;!?", "."*len(":;!?")))
-        #map punctuation to space
-        input_text = input_text.translate(str.maketrans("-|", " "*len("-|")))
+        # map punctuation to dot
+        input_text = input_text.translate(str.maketrans(":;!?", "." * len(":;!?")))
+        # map punctuation to space
+        input_text = input_text.translate(str.maketrans("-|", " " * len("-|")))
         # #map punctuation to no space
         # input_text = input_text.translate(str.maketrans("","","-"))
-
 
     # Remove stop words
     if remove_stop_words_flag:
@@ -100,10 +100,11 @@ def get_cleaned_sentences(input_dataset):
         article = clean_string(article, lowercase_flag=False, remove_line_breaks_flag=True,
                                normalize_punctuation_flag=True, remove_stop_words_flag=False, remove_numbers_flag=True,
                                stem_flag="Lem")
-        print("article post full cleaning = ", article)
+        # print("article post full cleaning = ", article)
         out_articles.append(article)
 
     return out_articles
+
 
 def create_data_subset(input_dataset, num_samples=1000):
     dataset = []
@@ -114,12 +115,15 @@ def create_data_subset(input_dataset, num_samples=1000):
     return data_subset
 
 
-
 if __name__ == "__main__":
-    random.seed(8)
+    random.seed(9)
     wikidata = download_data(dataset_name="wikipedia", dataset_id="20220301.simple")
     wikidata_subset = create_data_subset(input_dataset=wikidata, num_samples=1000)
     cleaned_subset = get_cleaned_sentences(input_dataset=wikidata_subset)
-    filename = "outputs/"
+    filename = "outputs/cleaned_sentences.txt"
+    with open(filename, 'w') as f:
+        for line in cleaned_subset:
+            f.write(line)
+            f.write('\n')
 
     print(len(cleaned_subset))
