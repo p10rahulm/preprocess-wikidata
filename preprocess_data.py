@@ -90,16 +90,19 @@ def clean_string(input_text,
     return final_string
 
 
-def get_cleaned_sentences(input_dataset):
+def get_cleaned_sentences(input_dataset, lowercase_flag=False, remove_line_breaks_flag=True,
+                          normalize_punctuation_flag=True, remove_stop_words_flag=False, remove_numbers_flag=True,
+                          stem_flag="Lem"):
     out_articles = []
     for i in range(len(input_dataset)):
         article = input_dataset[i]
         # print("article pre processing = ", article)
         article = clean_html(article)
         # print("article post html cleaning = ", article)
-        article = clean_string(article, lowercase_flag=False, remove_line_breaks_flag=True,
-                               normalize_punctuation_flag=True, remove_stop_words_flag=False, remove_numbers_flag=True,
-                               stem_flag="Lem")
+        article = clean_string(article, lowercase_flag=lowercase_flag, remove_line_breaks_flag=remove_line_breaks_flag,
+                               normalize_punctuation_flag=normalize_punctuation_flag,
+                               remove_stop_words_flag=remove_stop_words_flag, remove_numbers_flag=remove_numbers_flag,
+                               stem_flag=stem_flag)
         # print("article post full cleaning = ", article)
         out_articles.append(article)
 
@@ -119,7 +122,10 @@ if __name__ == "__main__":
     random.seed(9)
     wikidata = download_data(dataset_name="wikipedia", dataset_id="20220301.simple")
     wikidata_subset = create_data_subset(input_dataset=wikidata, num_samples=1000)
-    cleaned_subset = get_cleaned_sentences(input_dataset=wikidata_subset)
+    cleaned_subset = get_cleaned_sentences(input_dataset=wikidata_subset,
+                                           lowercase_flag=False, remove_line_breaks_flag=True,
+                                           normalize_punctuation_flag=True, remove_stop_words_flag=False,
+                                           remove_numbers_flag=False, stem_flag="Lem")
     filename = "outputs/cleaned_sentences.txt"
     with open(filename, 'w') as f:
         for line in cleaned_subset:
