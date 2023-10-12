@@ -9,7 +9,7 @@ Further, we use a subset of size k, (k=1000 for preliminary tasks) sampled from 
 Example Usage
 -----
 
-Example from `tokenized.txt`:
+Examples from `tokenized.txt`:
 
 ```
 Anarchism ||| Anarchism is a political philosophy that advocates self-governed societies based on voluntary…
