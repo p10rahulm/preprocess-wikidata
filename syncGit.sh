@@ -1,5 +1,5 @@
 # Git pull
-git pull origin main
+git pull --rebase origin main
 
 # Add files to git repository
 git add -A
