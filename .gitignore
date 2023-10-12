@@ -8,8 +8,9 @@ venv/
 
 backwardLM.iml
 .idea/
-RawDataset/tokenized.tar.gz
-
+raw_dataset/tokenized.tar.gz
+raw_dataset/tokenized.txt
+raw_dataset/tokenized.*
 
 # C extensions
 *.so

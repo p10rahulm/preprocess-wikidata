@@ -28,4 +28,6 @@ Instructions
 -----
 
 1. Download the tokenized subset of wiki article summaries from here: [💾 **tokenized.tar.gz**](http://blob.thijs.ai/wiki-summary-dataset/tokenized.tar.gz).
-2. 
+2. Paste it into the raw_dataset folder.
+3. Type: ```cd raw_dataset; tar -xvzf tokenized.tar.gz```
+4. Now run the preprocess_data.py file.
