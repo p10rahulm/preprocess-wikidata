@@ -16,9 +16,8 @@ nlp = spacy.load('en_core_web_sm')
 # For running stem_flag="Lem" download the below:
 currWD = os.getcwd()
 goal_dir = os.path.join(currWD, "nltk_data")
-
 nltk.data.path.append(goal_dir)
-nltk.download('wordnet')
+# nltk.download('wordnet', download_dir=goal_dir)
 
 def download_data(dataset_name="wikipedia", dataset_id="20220301.simple"):
     output_data = load_dataset(dataset_name, dataset_id)
@@ -127,7 +126,7 @@ if __name__ == "__main__":
     cleaned_subset = get_cleaned_sentences(input_dataset=wikidata_subset,
                                            lowercase_flag=False, remove_line_breaks_flag=True,
                                            normalize_punctuation_flag=True, remove_stop_words_flag=False,
-                                           remove_numbers_flag=False, stem_flag="Lem")
+                                           remove_numbers_flag=False, stem_flag="None") # You may use stem_flag = "Lem"
     filename = "outputs/cleaned_sentences.txt"
     with open(filename, 'w') as f:
         for line in cleaned_subset:
