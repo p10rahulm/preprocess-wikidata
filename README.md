@@ -22,3 +22,10 @@ Dataset construction
 -----
 
 The dataset was constructed using a script that calls Wikipedia API for every page with their `page_id`.
+
+
+Instructions
+-----
+
+1. Download the tokenized subset of wiki article summaries from here: [💾 **tokenized.tar.gz**](http://blob.thijs.ai/wiki-summary-dataset/tokenized.tar.gz).
+2. 

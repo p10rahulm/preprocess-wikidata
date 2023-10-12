@@ -1,6 +1,4 @@
-import pandas as pd
-import re
-import string
+import re, os
 import random
 from bs4 import BeautifulSoup
 import nltk
@@ -16,7 +14,11 @@ nlp = spacy.load('en_core_web_sm')
 
 
 # For running stem_flag="Lem" download the below:
-# nltk.download('wordnet')
+currWD = os.getcwd()
+goal_dir = os.path.join(currWD, "nltk_data")
+
+nltk.data.path.append(goal_dir)
+nltk.download('wordnet')
 
 def download_data(dataset_name="wikipedia", dataset_id="20220301.simple"):
     output_data = load_dataset(dataset_name, dataset_id)
