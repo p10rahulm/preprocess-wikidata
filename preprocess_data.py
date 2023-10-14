@@ -2,6 +2,7 @@ import os
 import random
 import re
 import tarfile
+import time
 import warnings
 
 # import urllib
@@ -177,15 +178,23 @@ def create_data_subset_using_sampling(input_dataset="raw_dataset/tokenized.txt",
 
 if __name__ == "__main__":
     random.seed(8)
+    start_time = time.time()
+    # INPUT PARAMETERS
     download_folder_name = 'raw_dataset'
+    file_to_unzip = 'tokenized.tar.gz'
+    input_data_filename = 'tokenized.txt'
+    num_samples = 10000
+    output_filename = "outputs/cleaned_sentences_10k.txt"
+
     retrieve_wiki_summary_data(download_link='http://blob.thijs.ai/wiki-summary-dataset/tokenized.tar.gz',
                                download_folder=download_folder_name)
+
+    
     print("file downloaded")
-    unzip_dataset('tokenized.tar.gz', 'raw_dataset/')
+    unzip_dataset(file_to_unzip, download_folder_name)
     print("file unzipped")
-    input_data_filename = 'tokenized.txt'
     input_data_filepath = os.path.join(download_folder_name, input_data_filename)
-    wikidata_subset = create_data_subset_using_sampling(input_dataset=input_data_filepath, num_samples=1000)
+    wikidata_subset = create_data_subset_using_sampling(input_dataset=input_data_filepath, num_samples=num_samples)
     print("data subset obtained")
     # wikidata = download_simplewiki_data(dataset_name="wikipedia", dataset_id="20220301.simple")
     # wikidata_subset = create_data_subset(input_dataset=wikidata, num_samples=1000)
@@ -198,12 +207,12 @@ if __name__ == "__main__":
                                            normalize_punctuation_flag=True, remove_stop_words_flag=False,
                                            remove_numbers_flag=False, stem_flag="None")  # You may use stem_flag = "Lem"
     print("data subset cleaned")
-    for i in range(len(cleaned_subset)):
-        print("i=%d, data=%s" % (i, cleaned_subset[i]))
-    output_filename = "outputs/cleaned_sentences.txt"
+    # for i in range(len(cleaned_subset)):
+    #     print("i=%d, data=%s" % (i, cleaned_subset[i]))
     with open(output_filename, 'w') as f:
         for line in cleaned_subset:
             f.write(line)
             f.write('\n')
     print("data printed to file. Filename: %s" % output_filename)
-    print(len(cleaned_subset))
+    print("len(cleaned_subset)=", len(cleaned_subset))
+    print("time taken = ", time.time() - start_time)

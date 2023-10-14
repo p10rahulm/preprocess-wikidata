@@ -11,6 +11,7 @@ backwardLM.iml
 raw_dataset/tokenized.tar.gz
 raw_dataset/tokenized.txt
 raw_dataset/tokenized.*
+outputs/entropy_vs_k.txt
 
 # C extensions
 *.so
@@ -216,3 +217,5 @@ fabric.properties
 
 # Built Visual Studio Code Extensions
 *.vsix
+plot_entropy_vs_k.py
+outputs/boxplots_for_entropy.png
