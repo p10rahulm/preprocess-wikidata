@@ -242,3 +242,4 @@ outputs/boxplots_for_entropy_for_kprime255.png
 outputs/boxplots_for_entropy_for_k25.png
 .gitignore
 outputs/boxplots_for_entropy_for_kprime100.png
+outputs/boxplots_with_k_kprime.zip
